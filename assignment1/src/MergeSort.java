@@ -1,37 +1,47 @@
+import java.util.*;
+
 /**
  * Created by mkravtsova on 9/20/16.
  */
 public class MergeSort {
-    private static Comparable[] aux;
 
-    public static void sort(Comparable[] a){
-        aux = new Comparable[a.length];
-        sort(a, 0, a.length - 1);
-    }
+    static void mergeSort(int[] num, int i, int j) {
 
-    private static void sort(Comparable[] a, int lo, int hi){
-        if (hi <= lo) return;
-        int mid = lo + (hi - lo) / 2;
-        sort(a, lo, mid);
-        sort(a, mid+1, hi);
-        merge(a, lo, mid, hi);
-    }
+        int low = i;
+        int high = j;
 
-    private static void merge(Comparable[] a, int lo, int mid, int hi){
-        int i = lo, j = mid+1;
+        if (low >= high) {
 
-        for(int k = lo; k <= hi; k++){
-            aux[k] = a[k];
+            return;
         }
-        for(int k = lo; k <= hi; k++){
-            if (i > mid){
-                a[k] = aux[j++];
-            } else if (j>hi){
-                a[k] = aux[i++];
-            } else if (less(aux[j], aux[i])){
-                a[k] = aux[j++];
-            } else {
-                a[k] = aux[i++];
+
+        int middle = (low + high) / 2;
+
+        mergeSort(num, low, middle);
+        mergeSort(num, middle + 1, high);
+
+        int end_low = middle;
+        int start_high = middle + 1;
+
+        while ((low <= end_low) && (start_high <= high)) {
+
+            if (num[low] < num[start_high]) {
+
+                low++;
+            }
+            else {
+
+                int Temp = num[start_high];
+
+                for (int k = start_high- 1; k >= low; k--) {
+
+                    num[k+1] = num[k];
+                }
+
+                num[low] = Temp;
+                low ++;
+                end_low ++;
+                start_high ++;
             }
         }
     }
