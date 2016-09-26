@@ -7,7 +7,6 @@ public class Main {
         int userMax;
         int i;
         int randomNumber;
-        int counter = 0;
 
 
         // Get user input of the max number generated
@@ -21,16 +20,20 @@ public class Main {
 
         ArrayDS arrayDS = new ArrayDS(userMax);
 
+        LinkedListDS linkedListDS = new LinkedListDS();
+
         for(i = 0; i < (userMax); i++){
             randomNumber = rand.nextInt(userMax) + 1;
-            if (randomNumber >= 50) {
-                arrayDS.addToCounter(counter);
+            if (randomNumber > 50) {
+                arrayDS.incrementCounter();
+                linkedListDS.incrementCounter();
             }
-            arrayDS.addToArray(randomNumber, i);
-
+            arrayDS.add(randomNumber, i);
+            linkedListDS.add(randomNumber);
         }
 
-        arrayDS.mergeSortArray();
+        arrayDS.logic();
+        linkedListDS.logic();
     }
 
 
