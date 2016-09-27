@@ -1,8 +1,8 @@
 /**
- * CS 3310: Data and File Structures
+ * <h1>CS 3310: Data and File Structures</h1>
  * Professor: Dr. Gupta
- * Author: Mariia Kravtsova
- * Due Date: September 27, 2016
+ * @autor: Mariia Kravtsova
+ * @since: September 27, 2016
  * Assignment 1: Generate random number, store it in linked list and array
  *               sort, delete, and insert the elements.
  */
@@ -36,6 +36,9 @@ public class Main {
 
         LinkedListDS linkedListDS = new LinkedListDS();
 
+        long firstPerformanceCounter = System.nanoTime();
+
+
         for(i = 0; i < (userMax); i++){
 
             randomNumber = rand.nextInt(upperBound) + 1;
@@ -49,10 +52,12 @@ public class Main {
 
             arrayDS.add(randomNumber, i);
             linkedListDS.add(randomNumber);
+
         }
 
         arrayDS.logic();
         linkedListDS.logic();
+        
     }
 
 }

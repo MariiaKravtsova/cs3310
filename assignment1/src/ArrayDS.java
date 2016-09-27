@@ -7,14 +7,15 @@
  */
 public class ArrayDS {
 
-    public int[] randArray;
-    public int[] deletedArray;
+    private int[] randArray;
+    private int[] deletedArray;
 
     int counter = 0;
 
     /**
     * Constructor that takes in the user input of the
     * amount of numbers to be generated and creates an array of that size
+    * @param userMax User input of the array size
     */
     public ArrayDS(int userMax){
 
@@ -22,7 +23,11 @@ public class ArrayDS {
 
     }
 
-    // Takes in the random number, and its position and inserts it into an array
+    /**
+    * Takes in the random number, and its position and inserts it into an array
+    * @param randomNumber takes random number
+    * @param i index of array
+    */
     public void add(int randomNumber, int i){
 
         randArray[i] = randomNumber;
@@ -39,6 +44,8 @@ public class ArrayDS {
     /**
     * takes in the array and the order to be sorted and runs through a bubble sort
     * loops through each value and swaps them if necessary
+    * @param randArray array to sort
+    * @param order order order of sorting
     */
     public void bubbleSort(int[] randArray, String order) {
         int i;
@@ -70,6 +77,8 @@ public class ArrayDS {
     * takes in the index of the array to be deleted and array
     * creates another array of which size is shorter by 1 and
     * copies each index skipping the index to be deleted
+    * @param index
+    * @param originalArray
     */
     public void delete(int index, int[] originalArray) {
         deletedArray = new int[originalArray.length - 1];
@@ -96,6 +105,9 @@ public class ArrayDS {
      * takes in the value to be inserted, the sorted array and the sort order
      * then based on the sort order places the value and copies
      * the values to a new array named copy
+     * @param value The value to be inserted
+     * @param randArray The Array to be sorted
+     * @param order The order of the sort
      */
     public void insert(int value, int[] randArray, String order)
     {
@@ -105,8 +117,7 @@ public class ArrayDS {
 
         for (i = 0; i < copy.length; i++) {
             if (!inserted) {
-                if ((order.equals("decreasing") && (randArray[i] < value)) ||
-                        (order.equals("increasing") && (randArray[i] > value))) {
+                if ((order.equals("decreasing") && (randArray[i] < value)) || (order.equals("increasing") && (randArray[i] > value))) {
 
                         copy[i] = value;
                         inserted = true;
@@ -127,7 +138,10 @@ public class ArrayDS {
 
     }
 
-    // Iterate through the array and print
+    /*
+    * Iterate through the array and print
+    * @param randArray The array to be printed
+    */
     public void print(int[] randArray){
 
         for (int i = 0; i < randArray.length; i++){

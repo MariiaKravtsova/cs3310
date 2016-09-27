@@ -27,7 +27,10 @@ public class LinkedListDS {
         counter++;
     }
 
-    // Takes a value, in this case random number and adds a new node
+    /**
+    * Takes a value, in this case random number and adds a new node
+    * @param value the value of the node to be created
+    */
     public void add(int value) {
 
         Node newNode = new Node(value);
@@ -44,41 +47,70 @@ public class LinkedListDS {
     }
 
     /**
-    // Takes a value and creates a node of it, then inserts it in
-    // the sorted list of the ascending order
+    * Takes a value and creates a node of it, then inserts it in
+    * the sorted list of the ascending order
+    * @param value to be inserted and
+    * @param order that linked list is sorted in
     */
-    public void insert(int value) {
+    public void insert(int value, String order) {
         Node nodeToInsert = new Node(value);
         Node temp;
         temp = head;
         int i;
 
-        if (nodeToInsert.value <= temp.value) {
+        if (order.equals("increasing")) {
+            if (nodeToInsert.value <= temp.value) {
 
-            nodeToInsert.next = head;
-            head.previous = nodeToInsert;
-            head = nodeToInsert;
+                nodeToInsert.next = head;
+                head.previous = nodeToInsert;
+                head = nodeToInsert;
 
-        }
-        else if (nodeToInsert.value >= tail.value) {
+            }
+            else if (nodeToInsert.value >= tail.value) {
 
-            tail.next = nodeToInsert;
-            nodeToInsert.previous = tail;
-            tail = nodeToInsert;
+                tail.next = nodeToInsert;
+                nodeToInsert.previous = tail;
+                tail = nodeToInsert;
 
-        }
-        else
-        {
-            for (i = 0; i < this.size; i++) {
-                if (nodeToInsert.value <= temp.value) {
-
-                    nodeToInsert.next = temp;
-                    nodeToInsert.previous = temp.previous;
-                    temp.previous.next = nodeToInsert;
-                    temp.previous = nodeToInsert;
-
+            }
+            else
+            {
+                while(!(nodeToInsert.value < temp.value)) {
+                    if (temp.next != null) {
+                        temp = temp.next;
+                    }
                 }
-                temp = temp.next;
+                nodeToInsert.next = temp;
+                nodeToInsert.previous = temp.previous;
+                temp.previous.next = nodeToInsert;
+                temp.previous = nodeToInsert;
+            }
+        } else if (order.equals("decreasing")) {
+            if (nodeToInsert.value >= temp.value) {
+
+                nodeToInsert.next = head;
+                head.previous = nodeToInsert;
+                head = nodeToInsert;
+
+            }
+            else if (nodeToInsert.value <= tail.value) {
+
+                tail.next = nodeToInsert;
+                nodeToInsert.previous = tail;
+                tail = nodeToInsert;
+
+            }
+            else
+            {
+                while(!(nodeToInsert.value > temp.value)) {
+                    if (temp.next != null) {
+                        temp = temp.next;
+                    }
+                }
+                nodeToInsert.next = temp;
+                nodeToInsert.previous = temp.previous;
+                temp.previous.next = nodeToInsert;
+                temp.previous = nodeToInsert;
             }
         }
 
@@ -91,8 +123,9 @@ public class LinkedListDS {
     }
 
     /**
-    // Takes a position of the node and moves the pointer until it finds it
-    // then passes the index of that node to the delete method
+    * Takes a position of the node and moves the pointer until it finds it
+    * then passes the index of that node to the delete method
+    * @param position of the node to be deleted
     */
     public void find(int position) {
         int i;
@@ -107,7 +140,10 @@ public class LinkedListDS {
 
     }
 
-    // Removes the links pointed to this node and links the nodes appropriately
+    /**
+    * Removes the links pointed to this node and links the nodes appropriately
+    * @param index that you would like to be deleted
+    */
     public void delete(Node index) {
         if (size == 1) {
             head = null;
@@ -147,7 +183,10 @@ public class LinkedListDS {
         System.out.println();
     }
 
-    // Traverses through the nodes
+    /*
+    * Traverses through the nodes
+    * @param index The node to be traversed
+    */
     public Node traverseNode(int index) {
         Node something;
 
@@ -171,7 +210,8 @@ public class LinkedListDS {
     /**
     * Takes in a string that specifies the sorting order
     * then sorts it using the bubble sort algorithm
-    * passes element into swap method to handle comparisons appropriately
+    * element into swap method to handle comparisons appropriately
+    * @param order The string that specifies the order
     */
      public void bubbleSort(String order) {
         int i;
@@ -200,7 +240,10 @@ public class LinkedListDS {
 
     }
 
-    // Swaps the adjacent elements of the bubble sort that are being compared
+    /*
+    * Swaps the adjacent elements of the bubble sort that are being compared
+    * @param a To be swapped
+    */
     public void swap(int a) {
         Node first = traverseNode(a);
         Node second = traverseNode(a + 1);
@@ -244,15 +287,16 @@ public class LinkedListDS {
 
             find(5);
 
+            insert(10, increasing);
+
         } else {
            bubbleSort(decreasing);
 
             find(2);
 
+            insert(10, decreasing);
         }
 
-        insert(10);
-        System.out.println(size);
     }
 
 }
