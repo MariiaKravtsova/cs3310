@@ -19,8 +19,5 @@ public class Node {
         previous = null;
     }
 
-    public int getValue() {
-        return value;
-    }
 }
 
