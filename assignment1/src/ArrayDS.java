@@ -77,8 +77,8 @@ public class ArrayDS {
     * takes in the index of the array to be deleted and array
     * creates another array of which size is shorter by 1 and
     * copies each index skipping the index to be deleted
-    * @param index
-    * @param originalArray
+    * @param index The index of the array to be deleted
+    * @param originalArray The original array to be deleted
     */
     public void delete(int index, int[] originalArray) {
         deletedArray = new int[originalArray.length - 1];
