@@ -1,27 +1,35 @@
 /**
- * Created by mkravtsova on 10/15/16.
+ * Class that replicates Queue behavior of FIFO by using two stacks
+ * enqueue() method a
  */
-public class stackQueue<T> {
-        private newStack<T> stack1 = new newStack<T>();
-        private newStack<T> stack2 = new newStack<T>();
+public class StackQueue<T> {
+        private NewStack<T> stack1 = new NewStack<T>();
+        private NewStack<T> stack2 = new NewStack<T>();
 
-        public void enqueue(T object) {
+
+    public void enqueue(T object) {
             stack1.push(object);
         }
 
-        public T dequeue() {
-            if (stack2.isEmpty()) {
-                if (stack1.isEmpty()) {
-                    return null;
-                }
-                while (!stack1.isEmpty()) {
-                    stack2.push(stack1.pop());
-                }
+    /*
+    *
+    * */
+    public T dequeue() {
+        if (stack2.isEmpty()) {
+            if (stack1.isEmpty()) {
+                return null;
             }
-
-            return stack2.pop();
+            while (!stack1.isEmpty()) {
+                stack2.push(stack1.pop());
+            }
         }
 
+        return stack2.pop();
+    }
+
+    /*
+    *
+    * */
     public void printQueue() {
         System.out.println(" ");
         if (stack2.isEmpty()) {

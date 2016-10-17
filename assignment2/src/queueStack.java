@@ -1,37 +1,53 @@
 /**
- * Created by mkravtsova on 10/15/16.
+ * Class creates queue1 and queue2 from NewQueue
+ * then it replicates the LIFO behavior of a Stack
+ * by using methods push and pop
  */
-public class queueStack<T> {
-    private newQueue<T> queue1 = new newQueue<T>();
-    private newQueue<T> queue2 = new newQueue<T>();
+public class QueueStack<T> {
+    private NewQueue<T> queue1 = new NewQueue<T>();
+    private NewQueue<T> queue2 = new NewQueue<T>();
 
     T top;
 
+    /*
+    * @param item of type T that adds the node to the stack which is a queue1
+    * */
     public void push(T item){
         queue1.enqueue(item);
         top = item;
-
-        queue1.print();
     }
 
+    /*
+    * Pop method that removes item from queue1
+    * then puts the item to the queue2 and then swaps
+    * queue2 with queue1
+    * */
     public void pop() {
 
-        newQueue<T> temp = queue1;
+        NewQueue<T> temp = queue1;
 
         while (queue1.getSize() > 1) {
             top = queue1.dequeue();
             queue2.enqueue(top);
         }
+
         queue1.dequeue();
 
         queue1 = queue2;
         queue2 = temp;
-        
+
     }
 
+    /*
+    * Print queue1 which mirrors the behaviour of a stack
+    * */
     public void printStack() {
+
         System.out.println(" ");
-        queue2.print();
+        if (queue1.isEmpty()){
+            System.out.println("Stack is empty.");
+        }
+        queue1.print();
 
     }
 }
