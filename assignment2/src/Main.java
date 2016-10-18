@@ -3,7 +3,17 @@ import java.util.Scanner;
 import java.io.FileReader;
 
 /**
+ * <h1>CS 3310: Assignment 2</h1>
+ * <h2>Professor Dr. Gupta</h2>
  *
+ * Assignment includes implementation of stack - NewStack, implementation of queue - NewQueue
+ * Implementation of stack using two queues - StackQueue, implementation of queue using two stacks - QueueStack
+ * Implementation of a stack with current minimum value using two stacks - MinValueStack
+ *
+ * @author Mariia Kravtsova
+ * @since 10-18-16
+ *
+ * Resources: Algorithms by Segwick, Stack Overflow
  */
 public class Main {
 
@@ -18,7 +28,7 @@ public class Main {
 
         /*
         * Read the TestForStackAndQueue.txt file then enqueue, dequeue, push and pop
-        * */
+        */
 
         String line = "";
         Scanner scan= null;

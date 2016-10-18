@@ -9,27 +9,27 @@ public class NewStack<T> {
     private Node<T> head = null;
     private int size = 0;
 
-    /*
+    /**
     * Constructs node type T, with item and next
-    * */
+    */
     private class Node<T> {
         T item;
         Node<T> next;
     }
 
-    /*
+    /**
     * @return boolean value that checks if stack is empty
     * */
     public boolean isEmpty() {
         return head == null;
     }
 
-    /*
+    /**
     * Push method that takes in an item of type T to add to the stack
     * as last in item, by using a temp node as head, and increments
     * variable size each time
     * @param item of type T to add last in the stack
-    * */
+    */
     public void push(T item) {
 
         Node<T> temp = head;
@@ -41,11 +41,11 @@ public class NewStack<T> {
         size++;
     }
 
-    /*
+    /**
     * Pop method that removes last item from the stack
     * Decrements size variable each time
     * @return item that was removed
-    * */
+    */
     public T pop() {
         if (isEmpty()) {
             System.out.println("Stack is empty.");
@@ -58,10 +58,10 @@ public class NewStack<T> {
         return item;
     }
 
-    /*
+    /**
     * Peek method that returns the top item in the stack
     * @return top item in the stack
-    * */
+    */
     public T peek() {
         if (isEmpty()) {
             System.out.println("Stack is empty.");
@@ -69,9 +69,9 @@ public class NewStack<T> {
         return head.item;
     }
 
-    /*
+    /**
     * Print method that traverses the list using a node current
-    * */
+    */
     public void print() {
         Node<T> current = head;
         while (current != null) {

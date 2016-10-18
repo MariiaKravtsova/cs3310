@@ -9,19 +9,19 @@ public class QueueStack<T> {
 
     T top;
 
-    /*
+    /**
     * @param item of type T that adds the node to the stack which is a queue1
-    * */
+    */
     public void push(T item){
         queue1.enqueue(item);
         top = item;
     }
 
-    /*
+    /**
     * Pop method that removes item from queue1
     * then puts the item to the queue2 and then swaps
     * queue2 with queue1
-    * */
+    */
     public void pop() {
 
         NewQueue<T> temp = queue1;
@@ -38,9 +38,9 @@ public class QueueStack<T> {
 
     }
 
-    /*
+    /**
     * Print queue1 which mirrors the behaviour of a stack
-    * */
+    */
     public void printStack() {
 
         if (queue1.isEmpty()){
