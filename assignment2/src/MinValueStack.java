@@ -1,53 +1,63 @@
-
+/*
+* Class that keeps track of current minimum value using two stacks
+* the current minimum value is pushed to min stack, and the stack
+* both stacks maintain the same size, so then pop method removes from both
+* */
 public class MinValueStack<T> {
-    private NewStack<T> stack = new NewStack<T>();
-    private Comparable<T> item;
-
-    private int size = 0;
-
-    private T minValue;
-
-
-
-    public T getMinValue() {
-        if (stack.isEmpty()) {
-            System.out.println("Stack is empty.");
-        }
-        return minValue;
-    }
+    private NewStack<Integer> stack = new NewStack<Integer>();
+    private NewStack<Integer> min = new NewStack<Integer>();
 
     /*
-    * Push method that takes in an item of type T to add to the stack
-    * as last in item, by using a temp node as head, and increments
-    * variable size each time
+    * Add item as last into stack and min, the min stack gets the
+    * current minimum value which is held into integer
+    * @param int x which is item to be pushed onto stack min and stack
+    * @return x which is item on sack and min
     * */
-    public void push(Comparable<T> item) {
+    public Integer push(int x) {
 
-        if (stack.isEmpty() || (item.compareTo(minValue) < 0)) {
+        Integer currentMin = 0;
 
+        if(stack.isEmpty()) {
+            stack.push(x);
+            min.push(x);
+            return x;
         }
 
-        size++;
+        currentMin=min.peek();
+
+        if(currentMin < x){
+            min.push(currentMin);
+        } else {
+            min.push(x);
+        }
+        stack.push(x);
+
+        return x;
     }
 
     /*
-    * Pop method that removes last item from the stack
-    * Decrements size variable each time
-    * @return item that was removed
+    * remove item from minimum stack, then remove from stack
+    * @return stack.pop()
     * */
-    public Comparable<T> pop() {
-
-
-        size--;
-
-        return item;
+    public Integer pop() {
+        if (stack.isEmpty()){
+            return null;
+        }
+        min.pop();
+        return stack.pop();
     }
-
 
     /*
-    * Print method that traverses the list using a node current
+    * get minimum value by getting the top item from min stack
+    * @return min.peek() which is a top value in the min stack
     * */
-    public void print() {
-
+    public Integer getMinimum()
+    {
+        if(min.isEmpty()) {
+            return null;
+        }
+        return min.peek();
     }
+
+
 }

@@ -43,7 +43,6 @@ public class QueueStack<T> {
     * */
     public void printStack() {
 
-        System.out.println(" ");
         if (queue1.isEmpty()){
             System.out.println("Stack is empty.");
         }

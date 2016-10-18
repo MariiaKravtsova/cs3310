@@ -3,16 +3,20 @@
  * enqueue() method a
  */
 public class StackQueue<T> {
+
         private NewStack<T> stack1 = new NewStack<T>();
         private NewStack<T> stack2 = new NewStack<T>();
 
-
-    public void enqueue(T object) {
-            stack1.push(object);
+    /*
+    * Enqueue method that add last item onto the stack1
+    * */
+    public void enqueue(T item) {
+            stack1.push(item);
         }
 
     /*
-    *
+    * Dequeue method that removes elements from stack1 and puts them onto stack2
+    * @return stack2.pop() which is item to be removed
     * */
     public T dequeue() {
         if (stack2.isEmpty()) {
@@ -28,10 +32,10 @@ public class StackQueue<T> {
     }
 
     /*
-    *
+    * Printing the stack2 that replicate dequeue behaviour
     * */
     public void printQueue() {
-        System.out.println(" ");
+        System.out.println();
         if (stack2.isEmpty()) {
             if (stack1.isEmpty()) {
                 System.out.println("Queue is empty");
