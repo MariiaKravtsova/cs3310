@@ -11,9 +11,13 @@ public class Main {
 
         System.out.println(arrayList);
 
-        System.out.println("Selection Sort sorted : " + selectionSortAL.selectionSort(arrayList));
+        System.out.println("Selection Sort : " + SelectionSortAL.selectionSort(arrayList));
 
-        System.out.println("Bubble Sort sorted: " + bubbleSortAL.bubbleSort(arrayList));
+        System.out.println("Bubble Sort: " + BubbleSortAL.bubbleSort(arrayList));
+
+        System.out.println("Insertion Sort: " + InsertionSortAL.insertionSort(arrayList));
+
+        System.out.println("Merge Sort: " + MergeSortAL.mergeSort(arrayList));
 
         LinkedList<String> addLinkedList = new LinkedList<String>();
 
