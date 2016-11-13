@@ -24,17 +24,21 @@ public class Main {
 
         System.out.println("Merge Sort: " + MergeSortAL.mergeSort(arrayList));
 
-        LinkedList<String> addLinkedList = new LinkedList<String>();
+        LinkedList<String> testList = new LinkedList<String>();
 
-        addLinkedList.add("a");
-        addLinkedList.add("c");
-        addLinkedList.add("b");
-        addLinkedList.add("d");
-        addLinkedList.add("e");
-        addLinkedList.add("f");
-        addLinkedList.add("g");
+        testList.add("a");
+        testList.add("c");
+        testList.add("b");
+        testList.add("d");
+        testList.add("e");
+        testList.add("f");
+        testList.add("g");
 
-        System.out.print("\n" + addLinkedList.nodeToString());
+        System.out.println("Unsorted: " + testList.toString());
+
+        LinkedList.bubbleSort(testList);
+
+        System.out.println("Bubble Sort: " + testList.toString());
 
     }
 }
