@@ -1,17 +1,22 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
 
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("b");
-        arrayList.add("c");
-        arrayList.add("a");
 
-        System.out.println(arrayList);
+        Scanner s = new Scanner(new File("NameList.txt"));
+        while (s.hasNext()) {
+            arrayList.add(s.next());
+        }
+        s.close();
 
-        System.out.println("Selection Sort : " + SelectionSortAL.selectionSort(arrayList));
+        System.out.println("Unsorted: " + arrayList);
+
+        System.out.println("Selection Sort: " + SelectionSortAL.selectionSort(arrayList));
 
         System.out.println("Bubble Sort: " + BubbleSortAL.bubbleSort(arrayList));
 
