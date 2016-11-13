@@ -18,7 +18,7 @@ class Node<E> {
 
 }
 
-public class AddLinkedList<E> {
+public class LinkedList<E> {
 
     private Node<E> head;
     private Node<E> tail;
@@ -26,7 +26,7 @@ public class AddLinkedList<E> {
 
 
 
-    AddLinkedList() {
+    LinkedList() {
         this.size = 0;
         this.head = null;
         this.tail = null;
