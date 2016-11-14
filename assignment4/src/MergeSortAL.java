@@ -5,7 +5,11 @@ import java.util.*;
  */
 public class MergeSortAL {
 
-
+    /*
+    * Divide the list into two, then sort them recursively
+    * @param list Array List of type T
+    * @return sorted Sorted List
+    */
     public static <T extends Comparable<T>> ArrayList<T> mergeSort(ArrayList<T> list) {
 
         ArrayList<T> sorted = new ArrayList<T>();
@@ -38,6 +42,12 @@ public class MergeSortAL {
         }
     }
 
+    /*
+    * Merge the two lists into two
+    * @param left side Array List of type T
+    * @param right side Array List of type T
+    * @return result of the merged array after swap
+    */
     public static <T extends Comparable<T>> ArrayList<T> merge(ArrayList<T> left, ArrayList<T> right) {
 
         ArrayList<T> result = new ArrayList<T>();
