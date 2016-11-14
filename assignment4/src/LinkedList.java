@@ -53,6 +53,22 @@ public class LinkedList<T> {
         return node;
     }
 
+    private Node<T> getNode(int index) {
+        Node<T> current = head;
+        int count = 0;
+        Node<T> temp;
+        temp = null;
+
+        while (current != null) {
+            if (count == index) {
+                return current;
+            }
+            count++;
+            current = current.getNext();
+        }
+        return temp;
+    }
+
     /*
      * @param position of item to be removed
      */
@@ -93,7 +109,7 @@ public class LinkedList<T> {
 
     /*
     * Implementation of the bubble sort. It iterates through the list and looks
-    * at the values next to each other and swaps them based on the comparTo result
+    * at the values next to each other and swaps them based on the compareTo result
     * @param list to be sorted
     */
     public static <T extends Comparable<? super T>> void bubbleSort(LinkedList<T> list) {
@@ -121,34 +137,27 @@ public class LinkedList<T> {
     * at the values and swaps them.
     * @param list to be sorted
     */
-    public static <T extends Comparable<? super T>> Node<T> insertionSort(LinkedList<T> list) {
-        Node<T> sortedListHead = list.getHead();
-        Node<T> previous;
-        Node<T> current;
-        Node<T> next;
+    public static <T extends Comparable<? super T>> void insertionSort(LinkedList<T> list) {
+        T swap;
+        int i;
+        int j;
 
         if (list.getHead() == null || list.getHead().getNext() == null) {
-            return sortedListHead;
+            return;
         }
 
-        current = sortedListHead;
-        while (current != null) {
-            next = current.getNext();
-            previous = sortedListHead;
+        for (i= 1; i < list.size(); i++) {
+            j = i;
+            while (j > 0 && (list.getNode(j-1).getValue()).compareTo(list.getNode(j).getValue()) > 0) {
 
-            while (previous.getNext() != null && (previous.getNext().getValue().compareTo(current.getValue()) > 0)) {
-                previous = previous.getNext();
+                swap = list.getNode(j).getValue();
+
+                list.getNode(j).setValue(list.getNode(j-1).getValue());
+                list.getNode(j-1).setValue(swap);
+
+                j--;
             }
-
-            // current.getNext().getValue() = previous.getNext().getValue();
-            // previous.getNext() = current;
-
-            current = next;
-
         }
-
-        return sortedListHead.getNext();
-
     }
 
     /*
@@ -159,7 +168,7 @@ public class LinkedList<T> {
     public static <T extends Comparable<? super T>> void selectionSort(LinkedList<T> list) {
         Node<T> start = list.getHead();
         Node<T> smallest;
-        Node<T> swap;
+        T swap;
         Node<T> node;
 
         while (start.getNext() != null) {
@@ -171,19 +180,11 @@ public class LinkedList<T> {
                 }
                 node = node.getNext();
             }
-            swap = start;
 
-            if (start.getNext().getValue() == smallest.getValue()) {
-                start.setValue(smallest.getValue());
-                start.getNext().setValue(swap.getValue());
-                smallest.setValue(swap.getValue());
-            } else {
-                start.setValue(smallest.getValue());
+            swap = smallest.getValue();
 
-                start.getNext().setValue(smallest.getNext().getValue());
-                smallest.setValue(swap.getValue());
-                smallest.getNext().setValue(swap.getNext().getValue());
-            }
+            smallest.setValue(start.getValue());
+            start.setValue(swap);
 
             start = start.getNext();
         }

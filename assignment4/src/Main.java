@@ -27,8 +27,9 @@ public class Main {
 
         Scanner s = new Scanner(new File("NameList.txt"));
         while (s.hasNext()) {
-            arrayList.add(s.next());
-            testList.add(s.next());
+            String name = s.next();
+            arrayList.add(name);
+            testList.add(name);
         }
         s.close();
 
