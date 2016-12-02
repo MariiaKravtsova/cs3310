@@ -1,51 +1,97 @@
+/**
+ * <h1>Assignment 5 part 2</h1>
+ * <h2>CS 3310</h2>
+ *
+ * This application takes a txt file, and based on the instructions
+ * in the file is inserts, searches, deletes, and prints the binary search tree
+ * in postorder, inorder and preorder
+ * @author: Mariia Kravtsova
+ * @since: December 1, 2016
+ */
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         binaryStreeImplicit bs = new binaryStreeImplicit();
 
-        mydata data = new mydata();
+        /**
+         * Reads the txt file provided, splits the ine into two parts based on function and data
+         * then applies the function on the data. The delete method is not working fully
+         */
+        try (BufferedReader br = new BufferedReader(new FileReader("/Users/mkravtsova/Github/cs3310/assignment5/src/hw5cs3310F16data.txt"))) {
+            String line;
+            String[] array1;
+            String[] array2;
 
-        data.stuName = "Dean";
-        data.courseNumber = 80085;
-        data.grade = 'F';
+            mydata record = new mydata();
 
-        bs.insert(data);
+            while ((line = br.readLine()) != null) {
+                array1 = line.split(":", 2);
 
-        mydata data2 = new mydata();
+                if (array1[0].equals("Insert")) {
 
-        data2.stuName = "Chris";
-        data2.courseNumber = 885;
-        data2.grade = 'A';
 
-        bs.insert(data2);
+                    array2 = array1[1].split(",");
 
-        mydata data3 = new mydata();
+                    record.stuName = array2[0];
+                    record.courseNumber = Integer.parseInt(array2[1].trim());
+                    record.grade = array2[2].charAt(0);
 
-        data3.stuName = "James";
-        data3.courseNumber = 885;
-        data3.grade = 'A';
+                    bs.insert(record);
+                    System.out.println("Record " + record.stuName + " was inserted.");
 
-        bs.insert(data3);
+//                } else if (array1[0].equals("Search")) {
+//
+//                    array2 = array1[1].split(",");
+//                    mydata record1 = new mydata();
+//
+//                    record.stuName = array2[0];
+//                    record.courseNumber = 0;
+//                    record.grade = 'A';
+//
+//                    System.out.println("Record found at " + bs.search(record));
+//
+//                } else if (array1[0].equals("Delete")) {
+//
+//                    array2 = array1[1].split(",");
+//                    mydata record2 = new mydata();
+//
+//                    record.stuName = array2[0];
+//                    record.courseNumber = 0;
+//                    record.grade = 'A';
+//
+//                    System.out.println("Record delete at " + bs.delete(record));
+//
+//                } else if (array1[0].equals("Postorder")) {
 
-        mydata data4 = new mydata();
+                    System.out.println();
+                    System.out.println("Postorder:");
+                    bs.postorderTraversal(0);
 
-        data4.stuName = "Adam";
-        data4.courseNumber = 885;
-        data4.grade = 'A';
+                } else if (array1[0].equals("Inorder")) {
 
-        bs.insert(data4);
+                    System.out.println();
+                    System.out.println("InOrder:");
+                    bs.inorderTraversal(0);
 
-        mydata data5 = new mydata();
+                } else if (array1[0].equals("Preorder")) {
 
-        data5.stuName = "Darwin";
-        data5.courseNumber = 885;
-        data5.grade = 'A';
+                    System.out.println();
+                    System.out.println("Preorder:");
+                    bs.preorderTraversal(0);
 
-        bs.insert(data5);
+                }
 
-        int i;
-        for (i = 0; i < bs.treeSize; i++) {
-            System.out.println(bs.tree.get(i).stuName);
+            }
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
         }
+
+
     }
 }

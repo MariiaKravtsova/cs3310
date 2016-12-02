@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 
 /**
- * Created by mkravtsova on 11/26/16.
+ * Binary Search Tree Implementation, it creates an array list tree which has
+ * a leftchild, a right child, a parent, prints it in preorder, postorder, inorder,
+ * it also has methods to insert, delete and search the tree
  */
 
 public class binaryStreeImplicit {
@@ -11,8 +13,10 @@ public class binaryStreeImplicit {
     int treeSize; // number of nodes in the binary search tree
     int lastIndexUsed; // the tree may not be complete, so specifies the array bound
 
-    //returns the index of the root of the tree or -1 if tree is empty
-    int root() {
+    /**
+     * @return root returns the index of the root of the tree or negative 1 if tree is empty
+     */
+    private int root() {
         if (treeSize == 0) {
             return -1;
         } else {
@@ -20,38 +24,75 @@ public class binaryStreeImplicit {
         }
     }
 
-    // return the index of the left child of a node at index i
-    int leftchild(int i) {
+    /**
+     * @param i index of the current node
+     * @return leftchild return the index of the left child of a node at index i
+     */
+    private int leftchild(int i) {
         return (2 * i) + 1;
     }
 
-    // return the index of the right child of a node at index i
-    int rightchild(int i){
+    /**
+     * @param i index of the current node
+     * @return leftchild return the index of the right child of a node at index i
+     */
+    private int rightchild(int i){
         return (2 * i) + 2;
     }
 
-    // return the index of the parent of a node at index i
-    int parent(int i) {
+    /**
+     * @param i index of the current node
+     * @return leftchild return the index of the parent of a node at index i
+     */
+    private int parent(int i) {
         return (i - 1) / 2;
     }
 
-    // prints data of nodes one line at a time; prints only the nodes where actual data exists (i.e., no holes)
-    void inorderTraversal(){
+    /**
+     * prints data of nodes in inorder one line at a time; prints only the nodes where actual data exists
+     * @param i to begin traversal
+     */
+    public void inorderTraversal(int i){
+
+        if (i < treeSize) {
+            inorderTraversal(leftchild(i));
+            System.out.print(tree.get(i).stuName + " ");
+            inorderTraversal(rightchild(i));
+        }
 
     }
 
-    // prints data of nodes one line at a time; prints only the nodes where actual data exists (i.e., no holes)
-    void preorderTraversal(){
-
+    /**
+     * prints data of nodes in a preorder one line at a time; prints only the nodes where actual data exists
+     * @param i to begin traversal
+     */
+    public void preorderTraversal(int i){
+        if (i < treeSize) {
+            System.out.print(tree.get(i).stuName + " ");
+            inorderTraversal(leftchild(i));
+            inorderTraversal(rightchild(i));
+        }
     }
 
-    // prints data of nodes one line at a time; prints only the nodes where actual data exists (i.e., no holes)
-    void postorderTraversal(){
 
+    /**
+     * prints data of nodes in a postordder one line at a time; prints only the nodes where actual data exists
+     * @param i to begin traversal
+     */
+    public void postorderTraversal(int i){
+        if (i < treeSize) {
+            inorderTraversal(leftchild(i));
+            inorderTraversal(rightchild(i));
+            System.out.print(tree.get(i).stuName + " ");
+        }
     }
 
-    // inserts x into the tree; returns the index of the array where inserted, or -1 if unsuccessful
-    int insert (mydata x) {
+    /**
+     * inserts x into the tree; returns the index of the array where inserted, or negative 1 if unsuccessful
+     * @param x of type mydata
+     * @return int return the integer that represents node index in the tree
+     */
+    public int insert (mydata x) {
         mydata node;
         int i;
         int j;
@@ -67,12 +108,11 @@ public class binaryStreeImplicit {
 
         node = tree.get(i);
         while (i < treeSize && node != null) {
-            // go left?
             if (x.stuName.compareTo(node.stuName) < 0) {
                 i = leftchild(i);
-            } else if (x.stuName.compareTo(node.stuName) > 0) { // go right
+            } else if (x.stuName.compareTo(node.stuName) > 0) {
                 i = rightchild(i);
-            } else { // value already exists
+            } else {
                 return -1;
             }
 
@@ -96,18 +136,68 @@ public class binaryStreeImplicit {
         return i;
     }
 
-    // deletes x from the tree – note this
-    // may create “hole” in the array storing the tree nodes but BST is
-    // maintained; returns -1 if x doesn’t exist, otherwise the index where x was
-    int delete (mydata x) {
+
+    /**
+     * deletes x from the tree note this
+     * may create a hole in the array storing the tree nodes but BST is maintained
+     * returns negative 1 if x does not exist, otherwise the index where x was
+     * @param x of type mydata
+     * @return int return the integer that represents node index in the tree
+     */
+    public int delete (mydata x) {
+        int i;
+        int replacement;
+
+        i = search(x);
+
+        if (i == -1) {
+            return -1;
+        }
+
+        replacement = leftchild(i);
+        if (replacement >= treeSize) {
+            // there is no left child
+            replacement = rightchild(replacement);
+            if (replacement >= treeSize) {
+                // there is no right child
+                tree.set(i, null);
+                return i;
+            } else {
+                // replace i with node at replacement and shift all children up
+            }
+
+            return replacement;
+        }
 
         return -1;
     }
 
-    // returns the index where x exists, otherwise -1
-    // add any other private / public methods that may help manipulation of BST
-    int search (mydata x) {
-        return -1;
+
+    /**
+     * returns the index where x exists, otherwise negative 1
+     * @param x of type mydata
+     * @return int return the integer that represents node index in the tree
+     */
+    public int search (mydata x) {
+
+        int i;
+        mydata node;
+
+        i = root();
+        node = tree.get(i);
+
+        while (!x.stuName.equals(node.stuName) && i <= treeSize) {
+            if (x.stuName.compareTo(node.stuName) < 0) {
+                i = leftchild(i);
+            } else if (x.stuName.compareTo(node.stuName) > 0) {
+                i = rightchild(i);
+            } else {
+                return -1;
+            }
+            node = tree.get(i);
+        }
+
+        return i;
     }
 
 }

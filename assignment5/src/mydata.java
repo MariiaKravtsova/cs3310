@@ -1,5 +1,5 @@
 /**
- * Created by mkravtsova on 11/26/16.
+ * Object mydata that holds student name, course number and grade
  */
 public class mydata {
 
@@ -7,5 +7,4 @@ public class mydata {
     int courseNumber;
     char grade;
 
-    // properties, constructors and methods
 }
