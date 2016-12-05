@@ -1,3 +1,16 @@
+/**
+ * <h1>Assignment 6 - CS 3310</h1>
+ *
+ * <p>This application uses a hash function to encrypt
+ * and store student's name. One of the big assumptions here is
+ * that the student names cannot be the same. The data gets stored
+ * into a txt file. You can look up a record or delete a record by value or by name.
+ * The data is stored in an arraylist and gets manipulated, at the end it saves
+ * the arraylist to the file. </p>
+ * @author: Mariia Kravtsova
+ * @since: December 5, 2016
+ */
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -7,14 +20,15 @@ public class Main {
         int choice;
         int value;
         String name;
-        Scanner user_input = new Scanner(System.in);
 
+        Scanner user_input = new Scanner(System.in);
         Hashing hashing = new Hashing();
 
         choice = 0;
 
         hashing.createFile();
 
+        // User interface
         while (choice != 7) {
             System.out.println();
             System.out.println("----------- MENU ------------");
@@ -44,7 +58,7 @@ public class Main {
                     break;
                 case 3:
                     System.out.println();
-                    System.out.println("Please enter a value to look up: ");
+                    System.out.println("Please enter a hash value to look up: ");
                     value = Integer.parseInt(user_input.next());
                     hashing.findByValue(value);
                     break;
@@ -56,7 +70,7 @@ public class Main {
                     break;
                 case 5:
                     System.out.println();
-                    System.out.println("Please enter a value to delete: ");
+                    System.out.println("Please enter a hash value to delete: ");
                     value = Integer.parseInt(user_input.next());
                     hashing.deleteByValue(value);
                     break;
@@ -68,6 +82,7 @@ public class Main {
 
         }
 
+        // Saves the current arraylist to the file
         hashing.saveFile();
     }
 

@@ -1,20 +1,28 @@
+/**
+ * Class that creates a file, or copies data from the file into an array list
+ * It contains methods to add, find, delete and print the hashed student names
+ */
+
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-/**
- *
- */
+
 public class Hashing {
 
-    // Satisfies the requirement of working with billion of data from the start
-    private static final int SIZE = 2000000;
+    // Assuming no names will be repeated
+    private static final int SIZE = 65535;
 
     private ArrayList<String> studentList = new ArrayList<String>(SIZE);
     private File studentFile = new File("studentsData.txt");
 
+    /**
+     * create a file named studentsData.txt and fill up the array list with null
+     * if the file does exist just fill up the array
+     * @throws FileNotFoundException since it is required
+     */
     public void createFile() throws FileNotFoundException {
 
         boolean created = false;
@@ -42,6 +50,9 @@ public class Hashing {
         }
     }
 
+    /**
+     * add a strung null for every position
+     */
     public void buildArray(){
         int i;
 
@@ -50,6 +61,9 @@ public class Hashing {
         }
     }
 
+    /**
+     * Write each item in the arraylist to the file on new line
+     */
     public void saveFile() {
         try {
             FileWriter writer = new FileWriter(studentFile);
@@ -63,6 +77,11 @@ public class Hashing {
 
     }
 
+    /**
+     * Add the student name by replacing the null string
+     * with the student name at a hashed index
+     * @param studentName the name of the student to add
+     */
     public void add(String studentName) {
         int hash;
         int i;
@@ -75,15 +94,23 @@ public class Hashing {
         studentList.set(hash, studentName);
     }
 
+    /**
+     * Fetch record at the value of the hashing
+     * @param hashValue the hashed value user is looking for
+     */
     public void findByValue(int hashValue) {
 
         if (!studentList.get(hashValue).equals("null")) {
-            System.out.println("At value " + hashValue + " we can find " + studentList.get(hashValue));
+            System.out.println("At value " + hashValue + " we found " + studentList.get(hashValue));
         } else {
             System.out.println("Record doesn't exist.");
         }
     }
 
+    /**
+     * Hash the name, then fetch record at the value of the hashing
+     * @param studentName the name of the student to look for
+     */
     public void findByName(String studentName) {
         int hash;
         int i;
@@ -93,12 +120,16 @@ public class Hashing {
             hash = hash^studentName.charAt(i);
         }
         if (!studentList.get(hash).equals("null")) {
-            System.out.println(studentName + "'s hash value is at " + studentList.get(hash));
+            System.out.println(studentName + "'s hash value is at " + hash);
         } else {
             System.out.println("Record doesn't exist.");
         }
     }
 
+    /**
+     * Hash the name, then replace the record at that index with null
+     * @param studentName the name of the student the record to delete
+     */
     public void deleteByName(String studentName) {
         int hash;
         int i;
@@ -115,6 +146,10 @@ public class Hashing {
         }
     }
 
+    /**
+     * Set the value of null at the hashed value
+     * @param hashValue the index we are deleting the student name at
+     */
     public void deleteByValue(int hashValue) {
         if (!studentList.get(hashValue).equals("null")) {
             studentList.set(hashValue, "null");
@@ -124,6 +159,9 @@ public class Hashing {
         }
     }
 
+    /**
+     * Printing the list of all records that are not null
+     */
     public void printAll() {
         int i;
         for (i = 0; i < SIZE; i++) {
